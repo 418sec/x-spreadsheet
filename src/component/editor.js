@@ -56,7 +56,7 @@ function keydownEventHandler(evt) {
 }
 
 function inputEventHandler(evt) {
-  const v = evt.target.value;
+  const v = evt.target.value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
   // console.log(evt, 'v:', v);
   const { suggest, textlineEl, validator } = this;
   const { cell } = this;
@@ -81,7 +81,7 @@ function inputEventHandler(evt) {
       resetTextareaSize.call(this);
       this.change('input', v);
     } else {
-      evt.target.value = '';
+      evt.target.value = cell.text;
     }
   } else {
     this.inputText = v;
